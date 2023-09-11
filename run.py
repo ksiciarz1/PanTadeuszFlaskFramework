@@ -2,14 +2,6 @@ from flask import Flask, render_template
 from markupsafe import escape
 
 app = Flask(__name__)
-def end():
-    return """
-    </div>
-    <footer class="containter">
-        <p>&copy; Kacper Siciarz</p>
-    </footer>
-</body>
-</html>"""
 
 @app.route("/")
 def index():
@@ -19,9 +11,8 @@ def index():
 def ksiega(number):
     number = int(number[1:])
     if(number>=1 or number<=12):
-        return index() + render_template(f'k{number}.html') + end()
-    else:
-        return index() + end()
+        return index() + render_template(f'k{escape(number)}.html')
+    return index()
 
 # @app.route("/k1")
 # def k1():
